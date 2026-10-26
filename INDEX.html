@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Movilidad & Conectividad — La Porcada × Aman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --forest:#1a2820;
+    --forest-deep:#0f1813;
+    --cream:#f4ede0;
+    --cream-warm:#ebe1cc;
+    --bronze:#a07d4e;
+    --bronze-light:#c9a878;
+    --sage:#7a8970;
+    --charcoal:#2a2823;
+    --stone:#8a8378;
+    --rust:#8c5a3c;
+  }
+  *{ -webkit-font-smoothing:antialiased; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:'Montserrat', sans-serif;
+    background:var(--cream);
+    color:var(--charcoal);
+    font-weight:300;
+    letter-spacing:0.02em;
+  }
+  .serif{ font-family:'Cormorant Garamond', serif; }
+  .display{ font-family:'Cormorant Garamond', serif; font-weight:300; letter-spacing:-0.01em; }
+  .mono{ font-family:'Courier New', monospace; letter-spacing:0.05em; }
+
+  /* HERO */
+  .hero-wrap{
+    position:relative;
+    width:100%;
+    height:90vh;
+    min-height:640px;
+    overflow:hidden;
+    background:var(--forest-deep);
+  }
+  .hero-bg{
+    position:absolute; inset:0;
+    background-image:url("images/ECORESORT.png");
+    background-size:cover;
+    background-position:center;
+    filter:brightness(0.55) saturate(0.85);
+  }
+  .hero-vignette{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at center, rgba(0,0,0,0) 25%, rgba(0,0,0,0.65) 100%),
+      linear-gradient(to bottom, rgba(15,24,19,0.5) 0%, rgba(15,24,19,0.2) 40%, rgba(15,24,19,0.85) 100%);
+    z-index:2;
+  }
+  .hero-content{
+    position:relative;
+    z-index:5;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:2.5rem 4rem;
+    color:var(--cream);
+  }
+  @media (max-width:768px){
+    .hero-content{ padding:1.5rem 1.5rem; }
+  }
+
+  .grain::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity:0.3;
+    mix-blend-mode:overlay;
+    pointer-events:none;
+    z-index:3;
+  }
+
+  .lang-btn{
+    border:1px solid rgba(244,237,224,0.35);
+    color:var(--cream);
+    backdrop-filter:blur(8px);
+    background:rgba(15,24,19,0.25);
+    transition:all .35s ease;
+    font-size:11px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+  }
+  .lang-btn:hover{
+    background:var(--bronze);
+    border-color:var(--bronze);
+    color:var(--cream);
+  }
+  .lang-btn.active{
+    background:var(--cream);
+    color:var(--forest-deep);
+    border-color:var(--cream);
+  }
+
+  .section-pad{ padding:7rem 2rem; }
+  @media (max-width:768px){ .section-pad{ padding:4.5rem 1.25rem; } }
+
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:0.4em;
+    text-transform:uppercase;
+    color:var(--bronze);
+    font-weight:500;
+  }
+  .rule{
+    height:1px;
+    background:linear-gradient(to right, transparent, var(--bronze) 50%, transparent);
+    width:80px;
+  }
+
+  /* STATS BLOCK */
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:rgba(160,125,78,0.25);
+    border:1px solid rgba(160,125,78,0.25);
+  }
+  @media (max-width:768px){
+    .stat-grid{ grid-template-columns:repeat(2,1fr); }
+  }
+  .stat-cell{
+    background:var(--cream);
+    padding:2.2rem 1.8rem;
+    text-align:left;
+  }
+  .stat-num{
+    font-family:'Cormorant Garamond', serif;
+    font-size:3.4rem;
+    font-weight:300;
+    line-height:1;
+    color:var(--forest);
+    margin-bottom:0.5rem;
+  }
+  .stat-num em{ font-style:italic; color:var(--bronze); }
+  .stat-label{
+    font-size:10px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--stone);
+  }
+
+  /* LAYER CARDS */
+  .layer-card{
+    position:relative;
+    background:var(--forest-deep);
+    color:var(--cream);
+    padding:2.2rem 1.8rem;
+    transition:transform .5s ease;
+    overflow:hidden;
+  }
+  .layer-card:hover{ transform:translateY(-4px); }
+  .layer-card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:2px;
+    background:var(--bronze);
+  }
+  .layer-num{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.8rem;
+    font-style:italic;
+    color:var(--bronze-light);
+    margin-bottom:0.4rem;
+  }
+  .layer-tag{
+    font-size:9px;
+    letter-spacing:0.35em;
+    color:var(--bronze-light);
+    text-transform:uppercase;
+    margin-bottom:0.8rem;
+  }
+  .layer-title{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.6rem;
+    font-weight:400;
+    margin-bottom:0.8rem;
+    line-height:1.1;
+  }
+  .layer-desc{
+    font-size:12px;
+    line-height:1.65;
+    opacity:0.8;
+  }
+
+  /* FLEET TABLE */
+  .fleet-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+  }
+  .fleet-table thead th{
+    text-align:left;
+    padding:1rem 1.2rem;
+    font-size:10px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--bronze);
+    border-bottom:1px solid var(--bronze);
+    background:var(--cream-warm);
+  }
+  .fleet-table tbody td{
+    padding:1.2rem 1.2rem;
+    border-bottom:1px solid rgba(42,40,35,0.1);
+    vertical-align:top;
+  }
+  .fleet-table tbody tr:hover{
+    background:rgba(160,125,78,0.05);
+  }
+  .fleet-name{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.3rem;
+    color:var(--forest);
+  }
+  .fleet-units{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.8rem;
+    color:var(--bronze);
+    font-style:italic;
+  }
+  .fleet-tag{
+    display:inline-block;
+    font-size:9px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    padding:3px 8px;
+    background:rgba(122,137,112,0.18);
+    color:var(--forest);
+    margin-top:0.3rem;
+  }
+  .fleet-tag.vip{ background:rgba(160,125,78,0.18); color:var(--rust); }
+  .fleet-tag.electric{ background:rgba(122,137,112,0.18); color:var(--forest); }
+  .fleet-tag.bio{ background:rgba(140,90,60,0.18); color:var(--rust); }
+
+  /* LAND CRUISER BLOCK */
+  .lc-block{
+    background:var(--forest);
+    color:var(--cream);
+    padding:5rem 4rem;
+    position:relative;
+    overflow:hidden;
+  }
+  @media (max-width:768px){
+    .lc-block{ padding:3rem 1.5rem; }
+  }
+  .lc-block::after{
+    content:"";
+    position:absolute;
+    top:0; right:-10%;
+    width:50%; height:100%;
+    background:radial-gradient(circle at 30% 50%, rgba(160,125,78,0.18), transparent 60%);
+    pointer-events:none;
+  }
+
+  /* BOARDWALK DIAGRAM */
+  .boardwalk-spec{
+    background:var(--cream-warm);
+    padding:2.5rem;
+    border-left:2px solid var(--bronze);
+  }
+  .spec-row{
+    display:grid;
+    grid-template-columns:160px 1fr;
+    gap:1.5rem;
+    padding:0.9rem 0;
+    border-bottom:1px dotted rgba(42,40,35,0.15);
+  }
+  .spec-row:last-child{ border-bottom:none; }
+  .spec-key{
+    font-size:10px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--stone);
+  }
+  .spec-val{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.05rem;
+    color:var(--forest);
+  }
+
+  /* PRESERVATION PRINCIPLES */
+  .principle{
+    display:grid;
+    grid-template-columns:50px 1fr;
+    gap:1.5rem;
+    padding:1.8rem 0;
+    border-top:1px solid rgba(42,40,35,0.12);
+  }
+  .principle:last-child{ border-bottom:1px solid rgba(42,40,35,0.12); }
+  .principle-num{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.4rem;
+    font-style:italic;
+    color:var(--bronze);
+    line-height:1.4;
+  }
+  .principle-text{
+    font-size:13px;
+    line-height:1.7;
+    color:var(--charcoal);
+  }
+  .principle-text strong{
+    color:var(--forest);
+    font-weight:500;
+  }
+
+  /* MARQUEE */
+  .marquee{
+    overflow:hidden;
+    white-space:nowrap;
+    border-top:1px solid rgba(244,237,224,0.15);
+    border-bottom:1px solid rgba(244,237,224,0.15);
+    background:var(--forest-deep);
+    color:var(--cream-warm);
+    padding:1.4rem 0;
+  }
+  .marquee-inner{
+    display:inline-block;
+    animation:scroll 42s linear infinite;
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.35rem;
+    font-style:italic;
+    letter-spacing:0.05em;
+  }
+  @keyframes scroll{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-50%); }
+  }
+  .marquee-inner span{ padding:0 2.5rem; }
+  .marquee-inner span::before{
+    content:"✦";
+    color:var(--bronze);
+    margin-right:2.5rem;
+  }
+
+  /* REVEAL */
+  .reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity 1s ease, transform 1s ease;
+  }
+  .reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* FOOTER */
+  footer{
+    background:var(--forest-deep);
+    color:var(--cream-warm);
+    padding:5rem 2rem 2rem;
+  }
+  .footer-logo{
+    font-family:'Cormorant Garamond', serif;
+    font-size:2.4rem;
+    font-weight:300;
+    letter-spacing:0.05em;
+  }
+  ::-webkit-scrollbar{ width:8px; }
+  ::-webkit-scrollbar-track{ background:var(--cream-warm); }
+  ::-webkit-scrollbar-thumb{ background:var(--bronze); }
+
+  .logo-mark{
+    width:60px; height:60px;
+    object-fit:contain;
+    filter:brightness(0) invert(1);
+    opacity:0.95;
+  }
+  .cta{
+    display:inline-flex;
+    align-items:center;
+    gap:0.8rem;
+    padding:1rem 2rem;
+    border:1px solid var(--bronze);
+    color:var(--bronze);
+    font-size:11px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    transition:all .4s ease;
+  }
+  .cta:hover{
+    background:var(--bronze);
+    color:var(--cream);
+  }
+  .corner-mark{
+    position:absolute;
+    width:24px; height:24px;
+    border-color:var(--bronze);
+  }
+  .corner-tl{ top:0; left:0; border-top:1px solid; border-left:1px solid; }
+  .corner-br{ bottom:0; right:0; border-bottom:1px solid; border-right:1px solid; }
+
+  /* ZONING DIAGRAM (CSS) */
+  .zoning-map{
+    position:relative;
+    background:var(--forest);
+    color:var(--cream);
+    padding:3rem;
+    min-height:380px;
+    overflow:hidden;
+  }
+  .zone{
+    position:absolute;
+    border:1px solid var(--bronze-light);
+    padding:0.4rem 0.8rem;
+    font-size:10px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    background:rgba(15,24,19,0.85);
+    color:var(--bronze-light);
+  }
+  .zone-dot{
+    position:absolute;
+    width:10px; height:10px;
+    background:var(--bronze);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+  }
+  .zone-line{
+    position:absolute;
+    height:1px;
+    background:repeating-linear-gradient(to right, var(--bronze) 0 6px, transparent 6px 12px);
+    transform-origin:left center;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- HERO                                                          -->
+<!-- ============================================================ -->
+<section class="hero-wrap grain">
+  <div class="hero-bg"></div>
+  <div class="hero-vignette"></div>
+
+  <div class="hero-content">
+    <div class="flex items-start justify-between">
+      <div class="flex items-center gap-4">
+        <img src="images/LOGO.png" alt="TAKYMA" class="logo-mark" />
+        <div>
+          <div class="serif text-xl leading-none">Takyma</div>
+          <div class="text-[10px] tracking-[0.3em] uppercase opacity-70 mt-1">Investment Pioneer</div>
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <button class="lang-btn active px-3 py-2" data-lang="es">ES</button>
+        <button class="lang-btn px-3 py-2" data-lang="en">EN</button>
+      </div>
+    </div>
+
+    <div class="flex-1 flex flex-col justify-center items-start" style="max-width:920px;">
+      <div class="eyebrow mb-6" style="color:var(--bronze-light);" data-i18n="hero.eyebrow">Capítulo 22 · Movilidad & conectividad</div>
+      <h1 class="display text-[clamp(2.6rem,7.5vw,7rem)] leading-[0.95] mb-8">
+        <span data-i18n="hero.h1">El reto de habitar</span><br/>
+        <em class="italic" style="color:var(--bronze-light);" data-i18n="hero.h2">sin herir.</em>
+      </h1>
+      <p class="serif italic text-lg md:text-2xl max-w-2xl opacity-85" data-i18n="hero.sub">
+        437 hectáreas de isla. 225.000 m² desarrollados — el 5,14%. 760 huéspedes en ocupación plena. La pregunta no es cómo moverlos, sino cómo hacerlo sin que noten que se mueven.
+      </p>
+    </div>
+
+    <div class="flex items-end justify-between text-[11px] tracking-[0.3em] uppercase opacity-70">
+      <div>
+        <span data-i18n="hero.loc1">Isla Porcada · Chiriquí · Panamá</span>
+      </div>
+      <div class="hidden md:block serif italic normal-case tracking-normal text-sm opacity-70" data-i18n="hero.tag">
+        « Cinco capas de movilidad, cero atajos contra el bosque. »
+      </div>
+      <div class="text-right">
+        © 2026 Takyma
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MARQUEE                                                      -->
+<!-- ============================================================ -->
+<div class="marquee">
+  <div class="marquee-inner">
+    <span data-i18n="m1">Boardwalks elevados</span>
+    <span data-i18n="m2">Flota 100% eléctrica interna</span>
+    <span data-i18n="m3">Land Cruiser solo para entrada y salida</span>
+    <span data-i18n="m4">Marina silenciosa</span>
+    <span data-i18n="m5">Movilidad ecuestre</span>
+    <span data-i18n="m1">Boardwalks elevados</span>
+    <span data-i18n="m2">Flota 100% eléctrica interna</span>
+    <span data-i18n="m3">Land Cruiser solo para entrada y salida</span>
+    <span data-i18n="m4">Marina silenciosa</span>
+    <span data-i18n="m5">Movilidad ecuestre</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- THE CHALLENGE                                                -->
+<!-- ============================================================ -->
+<section class="section-pad" style="background:var(--cream);">
+  <div class="max-w-6xl mx-auto reveal">
+
+    <div class="mb-16">
+      <div class="eyebrow mb-4" data-i18n="ch.eyebrow">El reto</div>
+      <div class="rule mb-6"></div>
+      <h2 class="display text-4xl md:text-6xl leading-[1.05] mb-10" style="color:var(--forest);">
+        <span data-i18n="ch.h1">Conectar cinco nodos</span><br/>
+        <em class="italic" style="color:var(--bronze);" data-i18n="ch.h2">sin coser el bosque.</em>
+      </h2>
+      <p class="serif text-lg md:text-xl max-w-3xl leading-relaxed" style="color:var(--charcoal);" data-i18n="ch.lead">
+        La Porcada es una isla de 437 hectáreas donde el 5,14% —225.000 m², unas 22,5 hectáreas— se desarrolla. Sobre esa superficie conviven 100 suites, 8 oasis, 50 villas del mar, 50 villas de orilla, una marina para grandes yates, una pista de aterrizaje existente, un casino, un hotel boutique, un centro de belleza y estética, un manantial, 300 cabezas de ganado Brahman en libertad y una hípica en expansión. Mover 760 huéspedes por ese territorio sin destruir lo que vinieron a buscar es, técnicamente, el problema más delicado del proyecto.
+      </p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-num">437<em>ha</em></div>
+        <div class="stat-label" data-i18n="s1">Superficie total isla</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">5,14<em>%</em></div>
+        <div class="stat-label" data-i18n="s2">Huella desarrollada · 225.000 m²</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">760</div>
+        <div class="stat-label" data-i18n="s3">Huéspedes plena ocupación</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">14<em>km</em></div>
+        <div class="stat-label" data-i18n="s4">Boardwalks peatonales</div>
+      </div>
+    </div>
+
+    <div class="mt-12">
+      <div class="eyebrow mb-3" data-i18n="prog.eyebrow">Programa de desarrollo · 225.000 m² · 5,14%</div>
+      <div class="rule mb-6"></div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-px" style="background:rgba(160,125,78,0.25); border:1px solid rgba(160,125,78,0.25);">
+        <div style="background:var(--cream); padding:1.5rem 1.2rem;">
+          <div style="font-family:'Cormorant Garamond', serif; font-size:2.4rem; font-weight:300; line-height:1; color:var(--forest); margin-bottom:0.4rem;">8</div>
+          <div style="font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--stone);" data-i18n="prog.k1">Oasis · 10.000 m² c/u</div>
+        </div>
+        <div style="background:var(--cream); padding:1.5rem 1.2rem;">
+          <div style="font-family:'Cormorant Garamond', serif; font-size:2.4rem; font-weight:300; line-height:1; color:var(--forest); margin-bottom:0.4rem;">50</div>
+          <div style="font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--stone);" data-i18n="prog.k2">Villas del mar · 1.000 m² c/u</div>
+        </div>
+        <div style="background:var(--cream); padding:1.5rem 1.2rem;">
+          <div style="font-family:'Cormorant Garamond', serif; font-size:2.4rem; font-weight:300; line-height:1; color:var(--forest); margin-bottom:0.4rem;">10.000<em style="font-style:italic; color:var(--bronze); font-size:1.3rem;"> m²</em></div>
+          <div style="font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--stone);" data-i18n="prog.k3">Hotel boutique</div>
+        </div>
+        <div style="background:var(--cream); padding:1.5rem 1.2rem;">
+          <div style="font-family:'Cormorant Garamond', serif; font-size:2.4rem; font-weight:300; line-height:1; color:var(--forest); margin-bottom:0.4rem;">6.000<em style="font-style:italic; color:var(--bronze); font-size:1.3rem;"> m²</em></div>
+          <div style="font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--stone);" data-i18n="prog.k4">Belleza & estética</div>
+        </div>
+        <div style="background:var(--cream); padding:1.5rem 1.2rem;">
+          <div style="font-family:'Cormorant Garamond', serif; font-size:2.4rem; font-weight:300; line-height:1; color:var(--forest); margin-bottom:0.4rem;">5.000<em style="font-style:italic; color:var(--bronze); font-size:1.3rem;"> m²</em></div>
+          <div style="font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--stone);" data-i18n="prog.k5">Casino</div>
+        </div>
+        <div style="background:var(--cream); padding:1.5rem 1.2rem;">
+          <div style="font-family:'Cormorant Garamond', serif; font-size:2.4rem; font-weight:300; line-height:1; color:var(--forest); margin-bottom:0.4rem;">45.000<em style="font-style:italic; color:var(--bronze); font-size:1.3rem;"> m²</em></div>
+          <div style="font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--stone);" data-i18n="prog.k6">Pista · 1,5 km × 30 m</div>
+        </div>
+        <div style="background:var(--cream); padding:1.5rem 1.2rem;">
+          <div style="font-family:'Cormorant Garamond', serif; font-size:2.4rem; font-weight:300; line-height:1; color:var(--forest); margin-bottom:0.4rem;">14.000<em style="font-style:italic; color:var(--bronze); font-size:1.3rem;"> m²</em></div>
+          <div style="font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--stone);" data-i18n="prog.k7">Caballerizas</div>
+        </div>
+        <div style="background:var(--cream); padding:1.5rem 1.2rem;">
+          <div style="font-family:'Cormorant Garamond', serif; font-size:2.4rem; font-weight:300; line-height:1; color:var(--forest); margin-bottom:0.4rem;">15.000<em style="font-style:italic; color:var(--bronze); font-size:1.3rem;"> m²</em></div>
+          <div style="font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--stone);" data-i18n="prog.k8">Logístico a pie de playa</div>
+        </div>
+      </div>
+      <div class="mt-4 text-[11px] serif italic" style="color:var(--stone);" data-i18n="prog.foot">
+        Suma total: 225.000 m² desarrollados sobre 4,37M m² de isla — el 5,14%.
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10 mt-16">
+      <div>
+        <div class="eyebrow mb-4" data-i18n="ch.nodes">Los cinco nodos a conectar</div>
+        <ul class="space-y-3 text-sm" style="color:var(--charcoal);">
+          <li class="flex gap-3"><span class="serif italic text-lg" style="color:var(--bronze);">i.</span><span data-i18n="ch.n1"><strong>Hotel central</strong> — 100 suites, recepción, restaurante, spa</span></li>
+          <li class="flex gap-3"><span class="serif italic text-lg" style="color:var(--bronze);">ii.</span><span data-i18n="ch.n2"><strong>Villas over-water</strong> — 50 unidades sobre el mar</span></li>
+          <li class="flex gap-3"><span class="serif italic text-lg" style="color:var(--bronze);">iii.</span><span data-i18n="ch.n3"><strong>Villas de orilla</strong> — 50 unidades (4-8 pax) + 8 oasis (4-20 pax)</span></li>
+          <li class="flex gap-3"><span class="serif italic text-lg" style="color:var(--bronze);">iv.</span><span data-i18n="ch.n4"><strong>Marina</strong> — grandes yates + casino anexo</span></li>
+          <li class="flex gap-3"><span class="serif italic text-lg" style="color:var(--bronze);">v.</span><span data-i18n="ch.n5"><strong>Pista de aterrizaje</strong> — existente, actualizada</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="eyebrow mb-4" data-i18n="ch.constraints">Restricciones no negociables</div>
+        <ul class="space-y-3 text-sm" style="color:var(--charcoal);">
+          <li class="flex gap-3"><span style="color:var(--bronze);">▸</span><span data-i18n="ch.c1">Cero nuevas carreteras que corten bosque primario</span></li>
+          <li class="flex gap-3"><span style="color:var(--bronze);">▸</span><span data-i18n="ch.c2">Cero vehículos de combustión en el interior del resort</span></li>
+          <li class="flex gap-3"><span style="color:var(--bronze);">▸</span><span data-i18n="ch.c3">Preservar los corredores ganaderos del Brahman</span></li>
+          <li class="flex gap-3"><span style="color:var(--bronze);">▸</span><span data-i18n="ch.c4">Máximo 35 dB en zonas de huéspedes</span></li>
+          <li class="flex gap-3"><span style="color:var(--bronze);">▸</span><span data-i18n="ch.c5">Dark sky compliance — cero contaminación lumínica</span></li>
+          <li class="flex gap-3"><span style="color:var(--bronze);">▸</span><span data-i18n="ch.c6">Paso libre de fauna bajo cada vía peatonal</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ZONING DIAGRAM                                               -->
+<!-- ============================================================ -->
+<section style="background:var(--cream-warm); padding:0 2rem 7rem;">
+  <div class="max-w-6xl mx-auto reveal">
+    <div class="eyebrow mb-4" data-i18n="map.eyebrow">Mapa de zonificación</div>
+    <div class="rule mb-6"></div>
+    <h3 class="display text-3xl md:text-4xl mb-8" style="color:var(--forest);" data-i18n="map.h">
+      Cinco nodos, un solo hilo conductor.
+    </h3>
+
+    <div class="zoning-map">
+      <!-- Pista de aterrizaje (top) -->
+      <div class="zone" style="top:18%; left:8%; padding:0.3rem 1.4rem; letter-spacing:0.15em;">
+        ✈ <span data-i18n="map.air">Pista de aterrizaje</span>
+      </div>
+      <div class="zone-dot" style="top:22%; left:14%;"></div>
+
+      <!-- Hotel central -->
+      <div class="zone" style="top:42%; left:30%;">
+        <span data-i18n="map.hotel">Hotel · 100 suites</span>
+      </div>
+      <div class="zone-dot" style="top:46%; left:36%;"></div>
+
+      <!-- Casino + Marina -->
+      <div class="zone" style="top:62%; left:54%;">
+        <span data-i18n="map.marina">Marina · Casino</span>
+      </div>
+      <div class="zone-dot" style="top:66%; left:60%;"></div>
+
+      <!-- Villas over-water (right) -->
+      <div class="zone" style="top:38%; right:8%;">
+        <span data-i18n="map.villas1">Villas over-water · 50</span>
+      </div>
+      <div class="zone-dot" style="top:42%; right:14%;"></div>
+
+      <!-- Villas de orilla + oasis (bottom) -->
+      <div class="zone" style="bottom:14%; left:42%;">
+        <span data-i18n="map.villas2">Villas orilla · 50 + Oasis · 5</span>
+      </div>
+      <div class="zone-dot" style="bottom:18%; left:48%;"></div>
+
+      <!-- Manantial -->
+      <div class="zone" style="top:18%; right:36%; opacity:0.6;">
+        <span data-i18n="map.spring">Manantial</span>
+      </div>
+
+      <!-- Establos -->
+      <div class="zone" style="bottom:30%; left:12%; opacity:0.6;">
+        <span data-i18n="map.stables">Establos · 30 caballos</span>
+      </div>
+
+      <!-- Ganado -->
+      <div class="zone" style="top:30%; right:18%; opacity:0.45; border-style:dashed;">
+        <span data-i18n="map.cattle">Brahman · 300 libres</span>
+      </div>
+
+      <!-- Conexiones (líneas) -->
+      <div class="zone-line" style="top:23%; left:14%; width:22%; transform:rotate(28deg);"></div>
+      <div class="zone-line" style="top:46%; left:36%; width:24%; transform:rotate(20deg);"></div>
+      <div class="zone-line" style="top:50%; left:38%; width:18%; transform:rotate(60deg);"></div>
+      <div class="zone-line" style="top:42%; left:38%; width:35%;"></div>
+      <div class="zone-line" style="top:75%; left:48%; width:12%; transform:rotate(-30deg);"></div>
+
+      <div class="mt-8 text-[10px] tracking-[0.3em] uppercase opacity-60" data-i18n="map.legend">
+        — Boardwalk peatonal elevado · • Nodo · ✦ Intersección
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FIVE LAYERS                                                  -->
+<!-- ============================================================ -->
+<section class="section-pad" style="background:var(--cream);">
+  <div class="max-w-6xl mx-auto reveal">
+
+    <div class="mb-14">
+      <div class="eyebrow mb-4" data-i18n="lay.eyebrow">El marco</div>
+      <div class="rule mb-6"></div>
+      <h2 class="display text-4xl md:text-6xl leading-[1.05] mb-6" style="color:var(--forest);">
+        <span data-i18n="lay.h1">Cinco capas</span>
+        <em class="italic" style="color:var(--bronze);" data-i18n="lay.h2">de movilidad.</em>
+      </h2>
+      <p class="serif text-lg max-w-3xl" style="color:var(--charcoal);" data-i18n="lay.lead">
+        No hay una única solución. Hay cinco, superpuestas, cada una con su misión. El huésped no debería enterarse de cuál usa: solo debería llegar.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-5 gap-px" style="background:rgba(160,125,78,0.3);">
+      <div class="layer-card">
+        <div class="layer-num">i</div>
+        <div class="layer-tag">Capa 1</div>
+        <div class="layer-title" data-i18n="l1.t">Peatonal</div>
+        <div class="layer-desc" data-i18n="l1.b">Boardwalks elevados de madera. La capa por defecto. Todo lo que se pueda hacer caminando, se hace caminando.</div>
+      </div>
+      <div class="layer-card">
+        <div class="layer-num">ii</div>
+        <div class="layer-tag">Capa 2</div>
+        <div class="layer-title" data-i18n="l2.t">Soft mobility</div>
+        <div class="layer-desc" data-i18n="l2.b">Bicicletas, e-bikes, caballos. La capa de la experiencia. El desplazamiento se vuelve paisaje.</div>
+      </div>
+      <div class="layer-card">
+        <div class="layer-num">iii</div>
+        <div class="layer-tag">Capa 3</div>
+        <div class="layer-title" data-i18n="l3.t">Light electric</div>
+        <div class="layer-desc" data-i18n="l3.b">Buggies eléctricos para familias, equipaje, distancias medias. La capa práctica, silenciosa, sin emisiones.</div>
+      </div>
+      <div class="layer-card">
+        <div class="layer-num">iv</div>
+        <div class="layer-tag">Capa 4</div>
+        <div class="layer-title" data-i18n="l4.t">VIP transfer</div>
+        <div class="layer-desc" data-i18n="l4.b">Land Cruiser negro, logos dorados. Solo para entrada, salida y movilidad reducida. Nunca para uso interno.</div>
+      </div>
+      <div class="layer-card">
+        <div class="layer-num">v</div>
+        <div class="layer-tag">Capa 5</div>
+        <div class="layer-title" data-i18n="l5.t">Agua & aire</div>
+        <div class="layer-desc" data-i18n="l5.b">Water taxis eléctricos, lanchas piloto, pista de aterrizaje. La capa que conecta La Porcada con el mundo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BOARDWALKS                                                    -->
+<!-- ============================================================ -->
+<section class="section-pad" style="background:var(--cream-warm);">
+  <div class="max-w-6xl mx-auto reveal">
+    <div class="grid md:grid-cols-2 gap-12">
+
+      <div>
+        <div class="eyebrow mb-4" data-i18n="bw.eyebrow">Capa 1 · Peatonal</div>
+        <div class="rule mb-6"></div>
+        <h2 class="display text-4xl md:text-5xl leading-[1.05] mb-8" style="color:var(--forest);">
+          <span data-i18n="bw.h1">Tarimas elevadas,</span><br/>
+          <em class="italic" style="color:var(--bronze);" data-i18n="bw.h2">no senderos.</em>
+        </h2>
+        <p class="text-sm leading-relaxed mb-6" style="color:var(--charcoal);" data-i18n="bw.p1">
+          La pieza clave de la movilidad interna no es un vehículo: es una <strong>tarima de madera elevada 60-90 cm sobre el terreno</strong>. Esa altura permite el paso libre de fauna —Brahman, ñeques, iguanas, crustáceos— por debajo, sin que el huésped los vea ni los interrumpa. El boardwalk no es un camino: es un puente continuo.
+        </p>
+        <p class="text-sm leading-relaxed mb-6" style="color:var(--charcoal);" data-i18n="bw.p2">
+          La estructura es CLT con tablado superior de madera tropical certificada FSC, sujeta con tornillería de acero galvanizado. La misma triada material del edificio principal. El lenguaje es coherente de cabo a rabo.
+        </p>
+        <p class="serif italic text-lg" style="color:var(--bronze);" data-i18n="bw.q">
+          « Caminar por La Porcada es caminar <em>sobre</em> el bosque, no por él. »
+        </p>
+      </div>
+
+      <div class="boardwalk-spec">
+        <div class="eyebrow mb-6" data-i18n="bw.spec">Especificaciones técnicas</div>
+
+        <div class="spec-row">
+          <div class="spec-key" data-i18n="bw.k1">Longitud total</div>
+          <div class="spec-val">14 km</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key" data-i18n="bw.k2">Ancho estándar</div>
+          <div class="spec-val">1.80 m</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key" data-i18n="bw.k3">Ancho accesible</div>
+          <div class="spec-val">2.40 m</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key" data-i18n="bw.k4">Altura sobre rasante</div>
+          <div class="spec-val">60–90 cm</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key" data-i18n="bw.k5">Estructura</div>
+          <div class="spec-val">CLT + acero galvanizado</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key" data-i18n="bw.k6">Tablado</div>
+          <div class="spec-val">Hardwood FSC (60 año)</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key" data-i18n="bw.k7">Sellado juntas</div>
+          <div class="spec-val">Epoxy marino flexible</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key" data-i18n="bw.k8">Iluminación</div>
+          <div class="spec-val">LED empotrado · 2700K · &lt;5 lux</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-key" data-i18n="bw.k9">Paso fauna</div>
+          <div class="spec-val">Cada 80 m — vano libre</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- LAND CRUISER BLOCK                                           -->
+<!-- ============================================================ -->
+<section class="lc-block grain">
+  <div class="max-w-6xl mx-auto relative z-10 reveal">
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+
+      <div>
+        <div class="eyebrow mb-4" style="color:var(--bronze-light);" data-i18n="lc.eyebrow">Capa 4 · VIP Transfer</div>
+        <div class="rule mb-6"></div>
+        <h2 class="display text-4xl md:text-5xl leading-[1.05] mb-8" style="color:var(--cream);">
+          <span data-i18n="lc.h1">Land Cruiser</span><br/>
+          <em class="italic" style="color:var(--bronze-light);" data-i18n="lc.h2">solo cuando hace falta.</em>
+        </h2>
+        <p class="text-sm leading-relaxed mb-6 opacity-90" data-i18n="lc.p1">
+          La flota de 12 Land Cruiser que imaginaste es correcta —pero con una regla de uso estricta: <strong>nunca circulan dentro del resort</strong>. Son la capa de entrada y salida. Llegada desde la pista de aterrizaje, salida a excursiones externas (Volcán Barú, Bocas del Toro), traslado de huéspedes con movilidad reducida que no pueden usar el boardwalk, emergencias médicas.
+        </p>
+        <p class="text-sm leading-relaxed opacity-85" data-i18n="lc.p2">
+          El interior del resort es territorio peatonal + eléctrico. Si un Land Cruiser entra al perímetro, es porque algo excepcional está pasando. Esa disciplina es lo que mantiene el silencio.
+        </p>
+      </div>
+
+      <div>
+        <div class="grid grid-cols-2 gap-4">
+          <div style="border:1px solid rgba(201,168,120,0.3); padding:1.5rem;">
+            <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--bronze-light);" data-i18n="lc.k1">Unidades</div>
+            <div class="serif text-4xl" style="color:var(--cream);">12</div>
+            <div class="text-[11px] opacity-70 mt-2" data-i18n="lc.k1b">10 activas + 2 reserva</div>
+          </div>
+          <div style="border:1px solid rgba(201,168,120,0.3); padding:1.5rem;">
+            <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--bronze-light);" data-i18n="lc.k2">Modelo</div>
+            <div class="serif text-2xl" style="color:var(--cream);">LC 300 GR-S</div>
+            <div class="text-[11px] opacity-70 mt-2" data-i18n="lc.k2b">Conversión híbrida</div>
+          </div>
+          <div style="border:1px solid rgba(201,168,120,0.3); padding:1.5rem;">
+            <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--bronze-light);" data-i18n="lc.k3">Acabado</div>
+            <div class="serif text-2xl" style="color:var(--cream);">Negro mate</div>
+            <div class="text-[11px] opacity-70 mt-2" data-i18n="lc.k3b">Logo dorado pan de oro</div>
+          </div>
+          <div style="border:1px solid rgba(201,168,120,0.3); padding:1.5rem;">
+            <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--bronze-light);" data-i18n="lc.k4">Uso interno</div>
+            <div class="serif text-4xl italic" style="color:var(--bronze-light);">0</div>
+            <div class="text-[11px] opacity-70 mt-2" data-i18n="lc.k4b">Solo entrada/salida</div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4" style="border:1px dashed rgba(201,168,120,0.4);">
+          <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--bronze-light);" data-i18n="lc.mission">Misiones autorizadas</div>
+          <ul class="text-[12px] space-y-1 opacity-90">
+            <li data-i18n="lc.m1">▸ Trasfer pista → hotel (8 min)</li>
+            <li data-i18n="lc.m2">▸ Excursiones externas (Bocas, Volcán)</li>
+            <li data-i18n="lc.m3">▸ Huéspedes con movilidad reducida</li>
+            <li data-i18n="lc.m4">▸ Emergencias médicas</li>
+            <li data-i18n="lc.m5">▸ Ceremonia de bienvenida VIP</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FULL FLEET TABLE                                             -->
+<!-- ============================================================ -->
+<section class="section-pad" style="background:var(--cream);">
+  <div class="max-w-6xl mx-auto reveal">
+
+    <div class="mb-12">
+      <div class="eyebrow mb-4" data-i18n="fl.eyebrow">La flota completa</div>
+      <div class="rule mb-6"></div>
+      <h2 class="display text-4xl md:text-6xl leading-[1.05] mb-6" style="color:var(--forest);">
+        <span data-i18n="fl.h1">440 unidades.</span>
+        <em class="italic" style="color:var(--bronze);" data-i18n="fl.h2">Cero combustión interna.</em>
+      </h2>
+      <p class="serif text-lg max-w-3xl" style="color:var(--charcoal);" data-i18n="fl.lead">
+        Calculado para 760 huéspedes en plena ocupación + 600 staff. Cada categoría cumple una función no intercambiable. La regla es simple: si quema gasolina, no entra al perímetro.
+      </p>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="fleet-table">
+        <thead>
+          <tr>
+            <th data-i18n="fl.t1">Vehículo</th>
+            <th data-i18n="fl.t2">Unidades</th>
+            <th data-i18n="fl.t3">Capacidad</th>
+            <th data-i18n="fl.t4">Uso</th>
+            <th data-i18n="fl.t5">Propulsión</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="fleet-name">Land Cruiser 300 GR-S</div><span class="fleet-tag vip">VIP · External</span></td>
+            <td><div class="fleet-units">12</div></td>
+            <td>4 pax + equipaje</td>
+            <td data-i18n="fl.r1">Transfer aeropuerto, excursiones, movilidad reducida</td>
+            <td data-i18n="fl.r1p">Híbrido</td>
+          </tr>
+          <tr>
+            <td><div class="fleet-name">Buggy eléctrico guest</div><span class="fleet-tag electric">100% EV</span></td>
+            <td><div class="fleet-units">90</div></td>
+            <td>4–6 pax</td>
+            <td data-i18n="fl.r2">Desplazamiento interno villas → amenidades</td>
+            <td data-i18n="fl.r2p">100% eléctrico</td>
+          </tr>
+          <tr>
+            <td><div class="fleet-name">Service EV</div><span class="fleet-tag electric">Back-of-house</span></td>
+            <td><div class="fleet-units">40</div></td>
+            <td>2 + carga</td>
+            <td data-i18n="fl.r3">Housekeeping, F&B, mantenimiento (rutas segregadas)</td>
+            <td data-i18n="fl.r3p">100% eléctrico</td>
+          </tr>
+          <tr>
+            <td><div class="fleet-name">Accesibilidad EV</div><span class="fleet-tag electric">Universal</span></td>
+            <td><div class="fleet-units">6</div></td>
+            <td>1 silla + 3</td>
+            <td data-i18n="fl.r4">Huéspedes con movilidad reducida dentro del resort</td>
+            <td data-i18n="fl.r4p">100% eléctrico</td>
+          </tr>
+          <tr>
+            <td><div class="fleet-name">Water taxi</div><span class="fleet-tag electric">Marina</span></td>
+            <td><div class="fleet-units">8</div></td>
+            <td>8–12 pax</td>
+            <td data-i18n="fl.r5">Marina ↔ villas over-water ↔ playa</td>
+            <td data-i18n="fl.r5p">100% eléctrico</td>
+          </tr>
+          <tr>
+            <td><div class="fleet-name">Pilot boat</div><span class="fleet-tag vip">Marina</span></td>
+            <td><div class="fleet-units">2</div></td>
+            <td>4</td>
+            <td data-i18n="fl.r6">Guía de yates, boyas, mantenimiento</td>
+            <td data-i18n="fl.r6p">Híbrido</td>
+          </tr>
+          <tr>
+            <td><div class="fleet-name">Bicicleta mecánica</div><span class="fleet-tag">Guest</span></td>
+            <td><div class="fleet-units">200</div></td>
+            <td>1</td>
+            <td data-i18n="fl.r7">Recorridos cortos, senderos, ocio</td>
+            <td data-i18n="fl.r7p">Mecánica</td>
+          </tr>
+          <tr>
+            <td><div class="fleet-name">E-bike</div><span class="fleet-tag electric">Guest</span></td>
+            <td><div class="fleet-units">50</div></td>
+            <td>1</td>
+            <td data-i18n="fl.r8">Recorridos largos, costa, pistas ganaderas</td>
+            <td data-i18n="fl.r8p">Eléctrico</td>
+          </tr>
+          <tr>
+            <td><div class="fleet-name">Caballo de silla</div><span class="fleet-tag bio">Hípica</span></td>
+            <td><div class="fleet-units">30</div></td>
+            <td>1</td>
+            <td data-i18n="fl.r9">Paseos escénicos, transporte experiencia</td>
+            <td data-i18n="fl.r9p">Biológica</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-8 grid md:grid-cols-3 gap-6 text-sm" style="color:var(--charcoal);">
+      <div class="p-4" style="background:var(--cream-warm);">
+        <div class="eyebrow mb-2" data-i18n="fl.note1">Principio rector</div>
+        <p class="text-[12px] leading-relaxed" data-i18n="fl.note1b">Cada villa dispondrá de 1 buggy asignado + 2 bicicletas. Las villas oasis y over-water con 2 buggies.</p>
+      </div>
+      <div class="p-4" style="background:var(--cream-warm);">
+        <div class="eyebrow mb-2" data-i18n="fl.note2">Carga</div>
+        <p class="text-[12px] leading-relaxed" data-i18n="fl.note2b">16 estaciones de carga solar distribuidas. Energía 100% del manantial + fotovoltaica.</p>
+      </div>
+      <div class="p-4" style="background:var(--cream-warm);">
+        <div class="eyebrow mb-2" data-i18n="fl.note3">Mantenimiento</div>
+        <p class="text-[12px] leading-relaxed" data-i18n="fl.note3b">Taller central CLT. Reciclaje de baterías con proveedor certificado. Vida útil 8 años.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MARINA & WATERWAYS                                           -->
+<!-- ============================================================ -->
+<section class="section-pad" style="background:var(--forest); color:var(--cream);">
+  <div class="max-w-6xl mx-auto reveal">
+
+    <div class="grid md:grid-cols-2 gap-12">
+
+      <div>
+        <div class="eyebrow mb-4" style="color:var(--bronze-light);" data-i18n="aq.eyebrow">Capa 5 · Agua</div>
+        <div class="rule mb-6"></div>
+        <h2 class="display text-4xl md:text-5xl leading-[1.05] mb-8" style="color:var(--cream);">
+          <span data-i18n="aq.h1">Marina silenciosa,</span><br/>
+          <em class="italic" style="color:var(--bronze-light);" data-i18n="aq.h2">water taxis sin oleaje.</em>
+        </h2>
+        <p class="text-sm leading-relaxed mb-4 opacity-90" data-i18n="aq.p1">
+          La marina principal aloja yates de 40 a 80 metros. Sus muelles son de estructura CLT sobre pilotes de acero galvanizado, con defensas de epoxy marino. Las embarcaciones de servicio —water taxis y pilot boats— son <strong>100% eléctricas</strong>, con cascos diseñados para minimizar el oleaje y proteger el manglar circundante.
+        </p>
+        <p class="text-sm leading-relaxed opacity-85" data-i18n="aq.p2">
+          Existen <strong>zonas no-wake</strong> obligatorias en todo el perímetro interior de la isla. La velocidad máxima es de 5 nudos. Los yates grandes son guiados por los pilot boats hasta su dársena, sin uso de hélices en zona costera.
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <div class="p-6" style="border:1px solid rgba(201,168,120,0.3);">
+          <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--bronze-light);" data-i18n="aq.k1">Marina principal</div>
+          <div class="serif text-2xl mb-2" style="color:var(--cream);" data-i18n="aq.k1b">24 dársenas · 40-80 m</div>
+          <div class="text-[12px] opacity-75" data-i18n="aq.k1c">Muelles CLT + pilotes galvanizados + deflectores epoxy</div>
+        </div>
+        <div class="p-6" style="border:1px solid rgba(201,168,120,0.3);">
+          <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--bronze-light);" data-i18n="aq.k2">Water taxis</div>
+          <div class="serif text-2xl mb-2" style="color:var(--cream);">8 unidades eléctricas</div>
+          <div class="text-[12px] opacity-75" data-i18n="aq.k2c">Casco de bajo oleaje · silencio &lt; 45 dB · 8-12 pax</div>
+        </div>
+        <div class="p-6" style="border:1px solid rgba(201,168,120,0.3);">
+          <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--bronze-light);" data-i18n="aq.k3">Zonas no-wake</div>
+          <div class="serif text-2xl mb-2" style="color:var(--cream);">5 nudos máx.</div>
+          <div class="text-[12px] opacity-75" data-i18n="aq.k3c">Todo el perímetro interior · vigilancia con boyas sensores</div>
+        </div>
+        <div class="p-6" style="border:1px solid rgba(201,168,120,0.3);">
+          <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--bronze-light);" data-i18n="aq.k4">Manglar protegido</div>
+          <div class="serif text-2xl mb-2" style="color:var(--cream);">Buffer 200 m</div>
+          <div class="text-[12px] opacity-75" data-i18n="aq.k4c">Restauración activa de Rhizophora mangle</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- AIRSTRIPE                                                    -->
+<!-- ============================================================ -->
+<section class="section-pad" style="background:var(--cream);">
+  <div class="max-w-6xl mx-auto reveal">
+
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+
+      <div>
+        <div class="eyebrow mb-4" data-i18n="air.eyebrow">Capa 5 · Aire</div>
+        <div class="rule mb-6"></div>
+        <h2 class="display text-4xl md:text-5xl leading-[1.05] mb-8" style="color:var(--forest);">
+          <span data-i18n="air.h1">Pista existente,</span><br/>
+          <em class="italic" style="color:var(--bronze);" data-i18n="air.h2">actualizada a Code B.</em>
+        </h2>
+        <p class="text-sm leading-relaxed mb-4" style="color:var(--charcoal);" data-i18n="air.p1">
+          La isla ya dispone de pista de aterrizaje. La intervención se limita a <strong>extenderla hasta 1.500 m</strong>, recategorizándola como Code B (regional jets tipo Embraer Phenom 300, Bombardier Global 7500). Pavimento permeable, balizas LED de bajo consumo, terminal CLT de 400 m². Sin nueva forestación talada.
+        </p>
+        <p class="text-sm leading-relaxed" style="color:var(--charcoal);" data-i18n="air.p2">
+          Desde la pista, el huésped toma un Land Cruiser (8 minutos por camino existente) hasta el hotel. A la vuelta, el protocolo se invierte. La pista nunca es el destino: es el umbral.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="p-5" style="background:var(--cream-warm); border-left:2px solid var(--bronze);">
+            <div class="text-[10px] tracking-[0.3em] uppercase mb-1" style="color:var(--stone);" data-i18n="air.k1">Longitud</div>
+            <div class="serif text-3xl" style="color:var(--forest);">1.500 m</div>
+          </div>
+          <div class="p-5" style="background:var(--cream-warm); border-left:2px solid var(--bronze);">
+            <div class="text-[10px] tracking-[0.3em] uppercase mb-1" style="color:var(--stone);" data-i18n="air.k2">Categoría</div>
+            <div class="serif text-3xl" style="color:var(--forest);">Code B</div>
+          </div>
+          <div class="p-5" style="background:var(--cream-warm); border-left:2px solid var(--bronze);">
+            <div class="text-[10px] tracking-[0.3em] uppercase mb-1" style="color:var(--stone);" data-i18n="air.k3">Terminal</div>
+            <div class="serif text-3xl" style="color:var(--forest);">400 m²</div>
+          </div>
+          <div class="p-5" style="background:var(--cream-warm); border-left:2px solid var(--bronze);">
+            <div class="text-[10px] tracking-[0.3em] uppercase mb-1" style="color:var(--stone);" data-i18n="air.k4">Transfer hotel</div>
+            <div class="serif text-3xl" style="color:var(--forest);">8 min</div>
+          </div>
+        </div>
+        <div class="p-5" style="background:var(--forest-deep); color:var(--cream);">
+          <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--bronze-light);" data-i18n="air.note">Principio rector</div>
+          <p class="text-[12px] leading-relaxed opacity-90" data-i18n="air.noteb">No se amplía forestación talada. La pista existente se reutiliza, solo se refuerza el pavimento y se actualiza la baliza. Sin nuevas pistas, sin helipuertos adicionales.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- EQUESTRIAN                                                   -->
+<!-- ============================================================ -->
+<section class="section-pad" style="background:var(--cream-warm);">
+  <div class="max-w-6xl mx-auto reveal">
+
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+
+      <div>
+        <div class="eyebrow mb-4" data-i18n="eq.eyebrow">Capa 2 · Soft mobility</div>
+        <div class="rule mb-6"></div>
+        <h2 class="display text-4xl md:text-5xl leading-[1.05] mb-8" style="color:var(--forest);">
+          <span data-i18n="eq.h1">Hípica ampliada</span><br/>
+          <em class="italic" style="color:var(--bronze);" data-i18n="eq.h2">de 6 a 30 cabezas.</em>
+        </h2>
+        <p class="text-sm leading-relaxed mb-4" style="color:var(--charcoal);" data-i18n="eq.p1">
+          Los 6 caballos actuales son el embrión. La hípica de La Porcada crece hasta 30 cabezas, con nuevos establos construidos en CLT. La raza preferida es el Paso Fino panameño —nativo, dócil, de marcha suave— complementado con algunos criollos para paseos largos.
+        </p>
+        <p class="text-sm leading-relaxed" style="color:var(--charcoal);" data-i18n="eq.p2">
+          Los caballos no son solo recreación: son <strong>transporte experiencial</strong>. Existen senderos ecuestres segregados de los peatonales, trazados sobre las rutas ganaderas existentes. Brahman y caballo conviven como siempre han hecho en el campo latinoamericano.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="p-5" style="background:var(--cream); border:1px solid rgba(160,125,78,0.3);">
+          <div class="flex justify-between items-center">
+            <div>
+              <div class="text-[10px] tracking-[0.3em] uppercase mb-1" style="color:var(--stone);" data-i18n="eq.k1">Cabezas actuales</div>
+              <div class="serif text-3xl" style="color:var(--forest);">6</div>
+            </div>
+            <div class="serif italic text-4xl" style="color:var(--bronze);">→</div>
+            <div class="text-right">
+              <div class="text-[10px] tracking-[0.3em] uppercase mb-1" style="color:var(--stone);" data-i18n="eq.k2">Cabezas objetivo</div>
+              <div class="serif text-3xl italic" style="color:var(--bronze);">30</div>
+            </div>
+          </div>
+        </div>
+        <div class="p-5" style="background:var(--cream); border:1px solid rgba(160,125,78,0.3);">
+          <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--stone);" data-i18n="eq.k3">Razas</div>
+          <div class="text-sm" style="color:var(--charcoal);">
+            <strong>Paso Fino panameño</strong> (20) · <strong>Criollo</strong> (8) · <strong>Pura sangre</strong> (2)
+          </div>
+        </div>
+        <div class="p-5" style="background:var(--cream); border:1px solid rgba(160,125,78,0.3);">
+          <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--stone);" data-i18n="eq.k4">Establos</div>
+          <div class="text-sm" style="color:var(--charcoal);">
+            CLT · 30 boxes · picadero cubierto · pista exterior 60×40 m
+          </div>
+        </div>
+        <div class="p-5" style="background:var(--cream); border:1px solid rgba(160,125,78,0.3);">
+          <div class="text-[10px] tracking-[0.3em] uppercase mb-2" style="color:var(--stone);" data-i18n="eq.k5">Senderos</div>
+          <div class="text-sm" style="color:var(--charcoal);">
+            18 km sobre rutas ganaderas existentes · segregados del boardwalk
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PRESERVATION PRINCIPLES                                      -->
+<!-- ============================================================ -->
+<section class="section-pad" style="background:var(--cream);">
+  <div class="max-w-5xl mx-auto reveal">
+
+    <div class="mb-12 text-center">
+      <div class="eyebrow mb-4" data-i18n="pr.eyebrow">Decálogo del ecosistema</div>
+      <div class="rule mx-auto mb-6"></div>
+      <h2 class="display text-4xl md:text-6xl leading-[1.05]" style="color:var(--forest);">
+        <span data-i18n="pr.h1">Diez principios</span><br/>
+        <em class="italic" style="color:var(--bronze);" data-i18n="pr.h2">no negociables.</em>
+      </h2>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">01</div>
+      <div class="principle-text" data-i18n="pr.p1"><strong>Cero nuevas carreteras.</strong> Todo boardwalk se traza sobre rutas ganaderas existentes o corredores ya perturbados. Ningún árbol centenario se toca.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">02</div>
+      <div class="principle-text" data-i18n="pr.p2"><strong>100% eléctrico dentro del perímetro.</strong> Buggies, water taxis, service EV. Cero combustión interna. Cero ruido de motor. Cero emisiones locales.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">03</div>
+      <div class="principle-text" data-i18n="pr.p3"><strong>Land Cruiser fuera del recinto.</strong> La flota VIP circula solo en la franja pista–hotel y en excursiones externas. Nunca dentro del resort.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">04</div>
+      <div class="principle-text" data-i18n="pr.p4"><strong>Paso de fauna garantizado.</strong> Cada 80 m, el boardwalk deja un vano libre de 60 cm de alto. Brahman, ñeques e iguanas cruzan sin obstáculo.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">05</div>
+      <div class="principle-text" data-i18n="pr.p5"><strong>Corredores ganaderos preservados.</strong> Las 300 cabezas de Brahman siguen en libertad. Sus rutas son sagradas. El boardwalk las cruza por encima.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">06</div>
+      <div class="principle-text" data-i18n="pr.p6"><strong>Dark sky compliance.</strong> Iluminación empotrada, 2700K, intensidad &lt; 5 lux. Cero luz cenital. Cero contaminación lumínica. Las estrellas se ven.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">07</div>
+      <div class="principle-text" data-i18n="pr.p7"><strong>Techo acústico 35 dB.</strong> En zonas de huéspedes, el sonido ambiente no supera 35 dB. Los buggies eléctricos emiten &lt; 40 dB a 5 m. El silencio es lujo.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">08</div>
+      <div class="principle-text" data-i18n="pr.p8"><strong>Marina no-wake.</strong> Velocidad máxima 5 nudos en todo el perímetro interior. Defensas de muelle en epoxy para cero contaminación por hidrocarburos.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">09</div>
+      <div class="principle-text" data-i18n="pr.p9"><strong>Buffer vegetacional 8 m.</strong> Cada vía, boardwalk o sendero deja 8 m de vegetación nativa a ambos lados. Restauración activa con especies del lugar.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">10</div>
+      <div class="principle-text" data-i18n="pr.p10"><strong>Manantial intacto.</strong> La fuente de agua de La Porcada nunca se canaliza. Se respeta su cauce natural. Solo se capta lo necesario, sin alterar el ciclo hidrológico.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CLOSING                                                     -->
+<!-- ============================================================ -->
+<section class="section-pad" style="background:var(--forest); color:var(--cream);">
+  <div class="max-w-4xl mx-auto text-center reveal">
+    <div class="eyebrow mb-6" style="color:var(--bronze-light);" data-i18n="close.eyebrow">Cierre</div>
+    <h2 class="display text-4xl md:text-7xl leading-[1.05] mb-10">
+      <span data-i18n="close.h1">Moverse en La Porcada</span><br/>
+      <em class="italic" style="color:var(--bronze-light);" data-i18n="close.h2">es caminar sobre el bosque.</em>
+    </h2>
+    <p class="serif italic text-lg md:text-xl opacity-80 max-w-2xl mx-auto" data-i18n="close.p">
+      Doce Land Cruiser negros para entrar y salir. Cuatrocientos treinta vehículos eléctricos para moverse dentro. Catorce kilómetros de boardwalk elevado. Treinta caballos. Ocho water taxis. Una marina que respeta el manglar. Una pista que no se amplía. Y debajo de todo, el bosque, intacto, como estaba antes de que llegáramos.
+    </p>
+    <div class="mt-10 text-[10px] tracking-[0.4em] uppercase opacity-60" data-i18n="close.sign">
+      — La Porcada × Aman · Movilidad 2026 —
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                       -->
+<!-- ============================================================ -->
+<footer>
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-10 mb-12 pb-10" style="border-bottom:1px solid rgba(244,237,224,0.15);">
+      <div>
+        <img src="images/LOGO.png" alt="Takyma" class="logo-mark mb-4" />
+        <div class="footer-logo" style="color:var(--cream);">Takyma</div>
+        <div class="text-[10px] tracking-[0.35em] uppercase opacity-60 mt-2" data-i18n="foot.tag">Investment Pioneer</div>
+      </div>
+      <div class="text-right text-[11px] tracking-[0.25em] uppercase opacity-70 leading-relaxed">
+        <div data-i18n="foot.l1">Isla Porcada · Chiriquí</div>
+        <div data-i18n="foot.l2">Panamá</div>
+        <div class="mt-3 opacity-60">CLT · Steel · Epoxy</div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] tracking-[0.2em] uppercase opacity-60">
+      <div>© 2026 EcoResort La Porcada · by Takyma Investment Pioneer</div>
+      <div class="serif italic normal-case tracking-normal text-sm opacity-80" data-i18n="foot.motto">
+        « La naturaleza no se domestica, se reverencia. »
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- SCRIPTS                                                      -->
+<!-- ============================================================ -->
+<script>
+const translations = {
+  es: {
+    "hero.eyebrow":"Capítulo 22 · Movilidad & conectividad",
+    "hero.h1":"El reto de habitar",
+    "hero.h2":"sin herir.",
+    "hero.sub":"437 hectáreas de isla. 225.000 m² desarrollados — el 5,14%. 760 huéspedes en ocupación plena. La pregunta no es cómo moverlos, sino cómo hacerlo sin que noten que se mueven.",
+    "hero.loc1":"Isla Porcada · Chiriquí · Panamá",
+    "hero.tag":"« Cinco capas de movilidad, cero atajos contra el bosque. »",
+    "m1":"Boardwalks elevados",
+    "m2":"Flota 100% eléctrica interna",
+    "m3":"Land Cruiser solo para entrada y salida",
+    "m4":"Marina silenciosa",
+    "m5":"Movilidad ecuestre",
+    "ch.eyebrow":"El reto",
+    "ch.h1":"Conectar cinco nodos",
+    "ch.h2":"sin coser el bosque.",
+    "ch.lead":"La Porcada es una isla de 437 hectáreas donde el 5,14% —225.000 m², unas 22,5 hectáreas— se desarrolla. Sobre esa superficie conviven 100 suites, 8 oasis, 50 villas del mar, 50 villas de orilla, una marina para grandes yates, una pista de aterrizaje existente, un casino, un hotel boutique, un centro de belleza y estética, un manantial, 300 cabezas de ganado Brahman en libertad y una hípica en expansión. Mover 760 huéspedes por ese territorio sin destruir lo que vinieron a buscar es, técnicamente, el problema más delicado del proyecto.",
+    "s1":"Superficie total isla",
+    "s2":"Huella desarrollada · 225.000 m²",
+    "prog.eyebrow":"Programa de desarrollo · 225.000 m² · 5,14%",
+    "prog.k1":"Oasis · 10.000 m² c/u",
+    "prog.k2":"Villas del mar · 1.000 m² c/u",
+    "prog.k3":"Hotel boutique",
+    "prog.k4":"Belleza & estética",
+    "prog.k5":"Casino",
+    "prog.k6":"Pista · 1,5 km × 30 m",
+    "prog.k7":"Caballerizas",
+    "prog.k8":"Logístico a pie de playa",
+    "prog.foot":"Suma total: 225.000 m² desarrollados sobre 4,37M m² de isla — el 5,14%.",
+    "s3":"Huéspedes plena ocupación",
+    "s4":"Boardwalks peatonales",
+    "ch.nodes":"Los cinco nodos a conectar",
+    "ch.n1":"<strong>Hotel central</strong> — 100 suites, recepción, restaurante, spa",
+    "ch.n2":"<strong>Villas over-water</strong> — 50 unidades sobre el mar",
+    "ch.n3":"<strong>Villas de orilla</strong> — 50 unidades (4-8 pax) + 8 oasis (4-20 pax)",
+    "ch.n4":"<strong>Marina</strong> — grandes yates + casino anexo",
+    "ch.n5":"<strong>Pista de aterrizaje</strong> — existente, actualizada",
+    "ch.constraints":"Restricciones no negociables",
+    "ch.c1":"Cero nuevas carreteras que corten bosque primario",
+    "ch.c2":"Cero vehículos de combustión en el interior del resort",
+    "ch.c3":"Preservar los corredores ganaderos del Brahman",
+    "ch.c4":"Máximo 35 dB en zonas de huéspedes",
+    "ch.c5":"Dark sky compliance — cero contaminación lumínica",
+    "ch.c6":"Paso libre de fauna bajo cada vía peatonal",
+    "map.eyebrow":"Mapa de zonificación",
+    "map.h":"Cinco nodos, un solo hilo conductor.",
+    "map.air":"Pista de aterrizaje",
+    "map.hotel":"Hotel · 100 suites",
+    "map.marina":"Marina · Casino",
+    "map.villas1":"Villas over-water · 50",
+    "map.villas2":"Villas orilla · 50 + Oasis · 5",
+    "map.spring":"Manantial",
+    "map.stables":"Establos · 30 caballos",
+    "map.cattle":"Brahman · 300 libres",
+    "map.legend":"— Boardwalk peatonal elevado · • Nodo · ✦ Intersección",
+    "lay.eyebrow":"El marco",
+    "lay.h1":"Cinco capas",
+    "lay.h2":"de movilidad.",
+    "lay.lead":"No hay una única solución. Hay cinco, superpuestas, cada una con su misión. El huésped no debería enterarse de cuál usa: solo debería llegar.",
+    "l1.t":"Peatonal",
+    "l1.b":"Boardwalks elevados de madera. La capa por defecto. Todo lo que se pueda hacer caminando, se hace caminando.",
+    "l2.t":"Soft mobility",
+    "l2.b":"Bicicletas, e-bikes, caballos. La capa de la experiencia. El desplazamiento se vuelve paisaje.",
+    "l3.t":"Light electric",
+    "l3.b":"Buggies eléctricos para familias, equipaje, distancias medias. La capa práctica, silenciosa, sin emisiones.",
+    "l4.t":"VIP transfer",
+    "l4.b":"Land Cruiser negro, logos dorados. Solo para entrada, salida y movilidad reducida. Nunca para uso interno.",
+    "l5.t":"Agua & aire",
+    "l5.b":"Water taxis eléctricos, lanchas piloto, pista de aterrizaje. La capa que conecta La Porcada con el mundo.",
+    "bw.eyebrow":"Capa 1 · Peatonal",
+    "bw.h1":"Tarimas elevadas,",
+    "bw.h2":"no senderos.",
+    "bw.p1":"La pieza clave de la movilidad interna no es un vehículo: es una <strong>tarima de madera elevada 60-90 cm sobre el terreno</strong>. Esa altura permite el paso libre de fauna —Brahman, ñeques, iguanas, crustáceos— por debajo, sin que el huésped los vea ni los interrumpa. El boardwalk no es un camino: es un puente continuo.",
+    "bw.p2":"La estructura es CLT con tablado superior de madera tropical certificada FSC, sujeta con tornillería de acero galvanizado. La misma triada material del edificio principal. El lenguaje es coherente de cabo a rabo.",
+    "bw.q":"« Caminar por La Porcada es caminar <em>sobre</em> el bosque, no por él. »",
+    "bw.spec":"Especificaciones técnicas",
+    "bw.k1":"Longitud total",
+    "bw.k2":"Ancho estándar",
+    "bw.k3":"Ancho accesible",
+    "bw.k4":"Altura sobre rasante",
+    "bw.k5":"Estructura",
+    "bw.k6":"Tablado",
+    "bw.k7":"Sellado juntas",
+    "bw.k8":"Iluminación",
+    "bw.k9":"Paso fauna",
+    "lc.eyebrow":"Capa 4 · VIP Transfer",
+    "lc.h1":"Land Cruiser",
+    "lc.h2":"solo cuando hace falta.",
+    "lc.p1":"La flota de 12 Land Cruiser que imaginaste es correcta —pero con una regla de uso estricta: <strong>nunca circulan dentro del resort</strong>. Son la capa de entrada y salida. Llegada desde la pista de aterrizaje, salida a excursiones externas (Volcán Barú, Bocas del Toro), traslado de huéspedes con movilidad reducida que no pueden usar el boardwalk, emergencias médicas.",
+    "lc.p2":"El interior del resort es territorio peatonal + eléctrico. Si un Land Cruiser entra al perímetro, es porque algo excepcional está pasando. Esa disciplina es lo que mantiene el silencio.",
+    "lc.k1":"Unidades",
+    "lc.k1b":"10 activas + 2 reserva",
+    "lc.k2":"Modelo",
+    "lc.k2b":"Conversión híbrida",
+    "lc.k3":"Acabado",
+    "lc.k3b":"Logo dorado pan de oro",
+    "lc.k4":"Uso interno",
+    "lc.k4b":"Solo entrada/salida",
+    "lc.mission":"Misiones autorizadas",
+    "lc.m1":"▸ Trasfer pista → hotel (8 min)",
+    "lc.m2":"▸ Excursiones externas (Bocas, Volcán)",
+    "lc.m3":"▸ Huéspedes con movilidad reducida",
+    "lc.m4":"▸ Emergencias médicas",
+    "lc.m5":"▸ Ceremonia de bienvenida VIP",
+    "fl.eyebrow":"La flota completa",
+    "fl.h1":"440 unidades.",
+    "fl.h2":"Cero combustión interna.",
+    "fl.lead":"Calculado para 760 huéspedes en plena ocupación + 600 staff. Cada categoría cumple una función no intercambiable. La regla es simple: si quema gasolina, no entra al perímetro.",
+    "fl.t1":"Vehículo",
+    "fl.t2":"Unidades",
+    "fl.t3":"Capacidad",
+    "fl.t4":"Uso",
+    "fl.t5":"Propulsión",
+    "fl.r1":"Transfer aeropuerto, excursiones, movilidad reducida",
+    "fl.r1p":"Híbrido",
+    "fl.r2":"Desplazamiento interno villas → amenidades",
+    "fl.r2p":"100% eléctrico",
+    "fl.r3":"Housekeeping, F&B, mantenimiento (rutas segregadas)",
+    "fl.r3p":"100% eléctrico",
+    "fl.r4":"Huéspedes con movilidad reducida dentro del resort",
+    "fl.r4p":"100% eléctrico",
+    "fl.r5":"Marina ↔ villas over-water ↔ playa",
+    "fl.r5p":"100% eléctrico",
+    "fl.r6":"Guía de yates, boyas, mantenimiento",
+    "fl.r6p":"Híbrido",
+    "fl.r7":"Recorridos cortos, senderos, ocio",
+    "fl.r7p":"Mecánica",
+    "fl.r8":"Recorridos largos, costa, pistas ganaderas",
+    "fl.r8p":"Eléctrico",
+    "fl.r9":"Paseos escénicos, transporte experiencia",
+    "fl.r9p":"Biológica",
+    "fl.note1":"Principio rector",
+    "fl.note1b":"Cada villa dispondrá de 1 buggy asignado + 2 bicicletas. Las villas oasis y over-water con 2 buggies.",
+    "fl.note2":"Carga",
+    "fl.note2b":"16 estaciones de carga solar distribuidas. Energía 100% del manantial + fotovoltaica.",
+    "fl.note3":"Mantenimiento",
+    "fl.note3b":"Taller central CLT. Reciclaje de baterías con proveedor certificado. Vida útil 8 años.",
+    "aq.eyebrow":"Capa 5 · Agua",
+    "aq.h1":"Marina silenciosa,",
+    "aq.h2":"water taxis sin oleaje.",
+    "aq.p1":"La marina principal aloja yates de 40 a 80 metros. Sus muelles son de estructura CLT sobre pilotes de acero galvanizado, con defensas de epoxy marino. Las embarcaciones de servicio —water taxis y pilot boats— son <strong>100% eléctricas</strong>, con cascos diseñados para minimizar el oleaje y proteger el manglar circundante.",
+    "aq.p2":"Existen <strong>zonas no-wake</strong> obligatorias en todo el perímetro interior de la isla. La velocidad máxima es de 5 nudos. Los yates grandes son guiados por los pilot boats hasta su dársena, sin uso de hélices en zona costera.",
+    "aq.k1":"Marina principal",
+    "aq.k1b":"24 dársenas · 40-80 m",
+    "aq.k1c":"Muelles CLT + pilotes galvanizados + deflectores epoxy",
+    "aq.k2":"Water taxis",
+    "aq.k2c":"Casco de bajo oleaje · silencio &lt; 45 dB · 8-12 pax",
+    "aq.k3":"Zonas no-wake",
+    "aq.k3c":"Todo el perímetro interior · vigilancia con boyas sensores",
+    "aq.k4":"Manglar protegido",
+    "aq.k4c":"Restauración activa de Rhizophora mangle",
+    "air.eyebrow":"Capa 5 · Aire",
+    "air.h1":"Pista existente,",
+    "air.h2":"actualizada a Code B.",
+    "air.p1":"La isla ya dispone de pista de aterrizaje. La intervención se limita a <strong>extenderla hasta 1.500 m</strong>, recategorizándola como Code B (regional jets tipo Embraer Phenom 300, Bombardier Global 7500). Pavimento permeable, balizas LED de bajo consumo, terminal CLT de 400 m². Sin nueva forestación talada.",
+    "air.p2":"Desde la pista, el huésped toma un Land Cruiser (8 minutos por camino existente) hasta el hotel. A la vuelta, el protocolo se invierte. La pista nunca es el destino: es el umbral.",
+    "air.k1":"Longitud",
+    "air.k2":"Categoría",
+    "air.k3":"Terminal",
+    "air.k4":"Transfer hotel",
+    "air.note":"Principio rector",
+    "air.noteb":"No se amplía forestación talada. La pista existente se reutiliza, solo se refuerza el pavimento y se actualiza la baliza. Sin nuevas pistas, sin helipuertos adicionales.",
+    "eq.eyebrow":"Capa 2 · Soft mobility",
+    "eq.h1":"Hípica ampliada",
+    "eq.h2":"de 6 a 30 cabezas.",
+    "eq.p1":"Los 6 caballos actuales son el embrión. La hípica de La Porcada crece hasta 30 cabezas, con nuevos establos construidos en CLT. La raza preferida es el Paso Fino panameño —nativo, dócil, de marcha suave— complementado con algunos criollos para paseos largos.",
+    "eq.p2":"Los caballos no son solo recreación: son <strong>transporte experiencial</strong>. Existen senderos ecuestres segregados de los peatonales, trazados sobre las rutas ganaderas existentes. Brahman y caballo conviven como siempre han hecho en el campo latinoamericano.",
+    "eq.k1":"Cabezas actuales",
+    "eq.k2":"Cabezas objetivo",
+    "eq.k3":"Razas",
+    "eq.k4":"Establos",
+    "eq.k5":"Senderos",
+    "pr.eyebrow":"Decálogo del ecosistema",
+    "pr.h1":"Diez principios",
+    "pr.h2":"no negociables.",
+    "pr.p1":"<strong>Cero nuevas carreteras.</strong> Todo boardwalk se traza sobre rutas ganaderas existentes o corredores ya perturbados. Ningún árbol centenario se toca.",
+    "pr.p2":"<strong>100% eléctrico dentro del perímetro.</strong> Buggies, water taxis, service EV. Cero combustión interna. Cero ruido de motor. Cero emisiones locales.",
+    "pr.p3":"<strong>Land Cruiser fuera del recinto.</strong> La flota VIP circula solo en la franja pista–hotel y en excursiones externas. Nunca dentro del resort.",
+    "pr.p4":"<strong>Paso de fauna garantizado.</strong> Cada 80 m, el boardwalk deja un vano libre de 60 cm de alto. Brahman, ñeques e iguanas cruzan sin obstáculo.",
+    "pr.p5":"<strong>Corredores ganaderos preservados.</strong> Las 300 cabezas de Brahman siguen en libertad. Sus rutas son sagradas. El boardwalk las cruza por encima.",
+    "pr.p6":"<strong>Dark sky compliance.</strong> Iluminación empotrada, 2700K, intensidad &lt; 5 lux. Cero luz cenital. Cero contaminación lumínica. Las estrellas se ven.",
+    "pr.p7":"<strong>Techo acústico 35 dB.</strong> En zonas de huéspedes, el sonido ambiente no supera 35 dB. Los buggies eléctricos emiten &lt; 40 dB a 5 m. El silencio es lujo.",
+    "pr.p8":"<strong>Marina no-wake.</strong> Velocidad máxima 5 nudos en todo el perímetro interior. Defensas de muelle en epoxy para cero contaminación por hidrocarburos.",
+    "pr.p9":"<strong>Buffer vegetacional 8 m.</strong> Cada vía, boardwalk o sendero deja 8 m de vegetación nativa a ambos lados. Restauración activa con especies del lugar.",
+    "pr.p10":"<strong>Manantial intacto.</strong> La fuente de agua de La Porcada nunca se canaliza. Se respeta su cauce natural. Solo se capta lo necesario, sin alterar el ciclo hidrológico.",
+    "close.eyebrow":"Cierre",
+    "close.h1":"Moverse en La Porcada",
+    "close.h2":"es caminar sobre el bosque.",
+    "close.p":"Doce Land Cruiser negros para entrar y salir. Cuatrocientos treinta vehículos eléctricos para moverse dentro. Catorce kilómetros de boardwalk elevado. Treinta caballos. Ocho water taxis. Una marina que respeta el manglar. Una pista que no se amplía. Y debajo de todo, el bosque, intacto, como estaba antes de que llegáramos.",
+    "close.sign":"— La Porcada × Aman · Movilidad 2026 —",
+    "foot.tag":"Investment Pioneer",
+    "foot.l1":"Isla Porcada · Chiriquí",
+    "foot.l2":"Panamá",
+    "foot.motto":"« La naturaleza no se domestica, se reverencia. »"
+  },
+  en: {
+    "hero.eyebrow":"Chapter 22 · Mobility & connectivity",
+    "hero.h1":"The challenge of inhabiting",
+    "hero.h2":"without wounding.",
+    "hero.sub":"437 hectares of island. 225,000 m² developed — 5.14%. 760 guests at full occupancy. The question is not how to move them, but how to do it without them noticing they move.",
+    "hero.loc1":"Isla Porcada · Chiriquí · Panama",
+    "hero.tag":"« Five mobility layers, zero shortcuts against the forest. »",
+    "m1":"Elevated boardwalks",
+    "m2":"100% electric internal fleet",
+    "m3":"Land Cruiser only for entry and exit",
+    "m4":"Silent marina",
+    "m5":"Equestrian mobility",
+    "ch.eyebrow":"The challenge",
+    "ch.h1":"Connect five nodes",
+    "ch.h2":"without stitching the forest.",
+    "ch.lead":"La Porcada is a 437-hectare island where 5.14% —225,000 m², about 22.5 hectares— is developed. On that surface coexist 100 suites, 8 oasis, 50 sea villas, 50 shore villas, a marina for large yachts, an existing airstrip, a casino, a boutique hotel, a beauty and aesthetics center, a spring, 300 free-range Brahman cattle and an expanding equestrian center. Moving 760 guests across that territory without destroying what they came to see is, technically, the project's most delicate problem.",
+    "s1":"Total island surface",
+    "s2":"Developed footprint · 225,000 m²",
+    "prog.eyebrow":"Development program · 225,000 m² · 5.14%",
+    "prog.k1":"Oasis · 10,000 m² each",
+    "prog.k2":"Sea villas · 1,000 m² each",
+    "prog.k3":"Boutique hotel",
+    "prog.k4":"Beauty & aesthetics",
+    "prog.k5":"Casino",
+    "prog.k6":"Strip · 1.5 km × 30 m",
+    "prog.k7":"Stables",
+    "prog.k8":"Beachside logistics building",
+    "prog.foot":"Total: 225,000 m² developed on 4.37M m² of island — 5.14%.",
+    "s3":"Guests at full occupancy",
+    "s4":"Pedestrian boardwalks",
+    "ch.nodes":"The five nodes to connect",
+    "ch.n1":"<strong>Central hotel</strong> — 100 suites, reception, restaurant, spa",
+    "ch.n2":"<strong>Over-water villas</strong> — 50 units over the sea",
+    "ch.n3":"<strong>Shore villas</strong> — 50 units (4-8 pax) + 8 oasis (4-20 pax)",
+    "ch.n4":"<strong>Marina</strong> — large yachts + adjacent casino",
+    "ch.n5":"<strong>Airstrip</strong> — existing, upgraded",
+    "ch.constraints":"Non-negotiable constraints",
+    "ch.c1":"Zero new roads cutting primary forest",
+    "ch.c2":"Zero combustion vehicles inside the resort",
+    "ch.c3":"Preserve Brahman cattle corridors",
+    "ch.c4":"Maximum 35 dB in guest zones",
+    "ch.c5":"Dark sky compliance — zero light pollution",
+    "ch.c6":"Free fauna passage under every walkway",
+    "map.eyebrow":"Zoning map",
+    "map.h":"Five nodes, a single connecting thread.",
+    "map.air":"Airstrip",
+    "map.hotel":"Hotel · 100 suites",
+    "map.marina":"Marina · Casino",
+    "map.villas1":"Over-water villas · 50",
+    "map.villas2":"Shore villas · 50 + Oasis · 5",
+    "map.spring":"Spring",
+    "map.stables":"Stables · 30 horses",
+    "map.cattle":"Brahman · 300 free",
+    "map.legend":"— Elevated pedestrian boardwalk · • Node · ✦ Intersection",
+    "lay.eyebrow":"The framework",
+    "lay.h1":"Five layers",
+    "lay.h2":"of mobility.",
+    "lay.lead":"There is no single solution. There are five, overlaid, each with its mission. The guest should not notice which one they use: they should just arrive.",
+    "l1.t":"Pedestrian",
+    "l1.b":"Elevated wooden boardwalks. The default layer. Anything that can be done walking, is done walking.",
+    "l2.t":"Soft mobility",
+    "l2.b":"Bicycles, e-bikes, horses. The experience layer. Movement becomes landscape.",
+    "l3.t":"Light electric",
+    "l3.b":"Electric buggies for families, luggage, medium distances. The practical layer, silent, zero emissions.",
+    "l4.t":"VIP transfer",
+    "l4.b":"Black Land Cruiser, gold logos. Only for entry, exit and reduced mobility. Never for internal use.",
+    "l5.t":"Water & air",
+    "l5.b":"Electric water taxis, pilot boats, airstrip. The layer connecting La Porcada to the world.",
+    "bw.eyebrow":"Layer 1 · Pedestrian",
+    "bw.h1":"Elevated boardwalks,",
+    "bw.h2":"not paths.",
+    "bw.p1":"The key piece of internal mobility is not a vehicle: it is a <strong>wooden boardwalk elevated 60-90 cm above grade</strong>. That height allows free fauna passage —Brahman, agoutis, iguanas, crustaceans— underneath, without the guest seeing or interrupting them. The boardwalk is not a path: it is a continuous bridge.",
+    "bw.p2":"The structure is CLT with a top deck of FSC-certified tropical hardwood, fastened with galvanized steel hardware. The same material triad as the main building. The language is consistent end to end.",
+    "bw.q":"« Walking through La Porcada is walking <em>over</em> the forest, not through it. »",
+    "bw.spec":"Technical specifications",
+    "bw.k1":"Total length",
+    "bw.k2":"Standard width",
+    "bw.k3":"Accessible width",
+    "bw.k4":"Height above grade",
+    "bw.k5":"Structure",
+    "bw.k6":"Decking",
+    "bw.k7":"Joint sealing",
+    "bw.k8":"Lighting",
+    "bw.k9":"Fauna passage",
+    "lc.eyebrow":"Layer 4 · VIP Transfer",
+    "lc.h1":"Land Cruiser",
+    "lc.h2":"only when needed.",
+    "lc.p1":"The fleet of 12 Land Cruisers you imagined is correct —but with a strict usage rule: <strong>they never drive inside the resort</strong>. They are the entry and exit layer. Arrival from the airstrip, departure on external excursions (Volcán Barú, Bocas del Toro), transfer of mobility-impaired guests who cannot use the boardwalk, medical emergencies.",
+    "lc.p2":"The resort interior is pedestrian + electric territory. If a Land Cruiser enters the perimeter, something exceptional is happening. That discipline is what keeps the silence.",
+    "lc.k1":"Units",
+    "lc.k1b":"10 active + 2 reserve",
+    "lc.k2":"Model",
+    "lc.k2b":"Hybrid conversion",
+    "lc.k3":"Finish",
+    "lc.k3b":"Gold leaf logo",
+    "lc.k4":"Internal use",
+    "lc.k4b":"Entry/exit only",
+    "lc.mission":"Authorized missions",
+    "lc.m1":"▸ Transfer strip → hotel (8 min)",
+    "lc.m2":"▸ External excursions (Bocas, Volcán)",
+    "lc.m3":"▸ Mobility-impaired guests",
+    "lc.m4":"▸ Medical emergencies",
+    "lc.m5":"▸ VIP welcome ceremony",
+    "fl.eyebrow":"The complete fleet",
+    "fl.h1":"440 units.",
+    "fl.h2":"Zero internal combustion.",
+    "fl.lead":"Calculated for 760 guests at full occupancy + 600 staff. Each category fills a non-interchangeable role. The rule is simple: if it burns gasoline, it does not enter the perimeter.",
+    "fl.t1":"Vehicle",
+    "fl.t2":"Units",
+    "fl.t3":"Capacity",
+    "fl.t4":"Use",
+    "fl.t5":"Propulsion",
+    "fl.r1":"Airport transfer, excursions, reduced mobility",
+    "fl.r1p":"Hybrid",
+    "fl.r2":"Internal movement villas → amenities",
+    "fl.r2p":"100% electric",
+    "fl.r3":"Housekeeping, F&B, maintenance (segregated routes)",
+    "fl.r3p":"100% electric",
+    "fl.r4":"Mobility-impaired guests inside the resort",
+    "fl.r4p":"100% electric",
+    "fl.r5":"Marina ↔ over-water villas ↔ beach",
+    "fl.r5p":"100% electric",
+    "fl.r6":"Yacht guidance, buoys, maintenance",
+    "fl.r6p":"Hybrid",
+    "fl.r7":"Short trips, trails, leisure",
+    "fl.r7p":"Mechanical",
+    "fl.r8":"Long routes, coast, cattle trails",
+    "fl.r8p":"Electric",
+    "fl.r9":"Scenic rides, experiential transport",
+    "fl.r9p":"Biological",
+    "fl.note1":"Governing principle",
+    "fl.note1b":"Each villa gets 1 assigned buggy + 2 bicycles. Oasis and over-water villas get 2 buggies.",
+    "fl.note2":"Charging",
+    "fl.note2b":"16 solar charging stations distributed. 100% spring + photovoltaic energy.",
+    "fl.note3":"Maintenance",
+    "fl.note3b":"Central CLT workshop. Certified battery recycling. 8-year lifespan.",
+    "aq.eyebrow":"Layer 5 · Water",
+    "aq.h1":"Silent marina,",
+    "aq.h2":"wake-free water taxis.",
+    "aq.p1":"The main marina hosts yachts from 40 to 80 meters. Its docks are CLT structures on galvanized steel piles, with marine epoxy fenders. Service vessels —water taxis and pilot boats— are <strong>100% electric</strong>, with hulls designed to minimize wake and protect the surrounding mangrove.",
+    "aq.p2":"Mandatory <strong>no-wake zones</strong> exist across the entire inner perimeter of the island. Maximum speed is 5 knots. Large yachts are guided by pilot boats to their berth, without using propellers in the coastal zone.",
+    "aq.k1":"Main marina",
+    "aq.k1b":"24 berths · 40-80 m",
+    "aq.k1c":"CLT docks + galvanized piles + epoxy deflectors",
+    "aq.k2":"Water taxis",
+    "aq.k2c":"Low-wake hull · noise &lt; 45 dB · 8-12 pax",
+    "aq.k3":"No-wake zones",
+    "aq.k3c":"Entire inner perimeter · monitored by sensor buoys",
+    "aq.k4":"Protected mangrove",
+    "aq.k4c":"Active restoration of Rhizophora mangle",
+    "air.eyebrow":"Layer 5 · Air",
+    "air.h1":"Existing strip,",
+    "air.h2":"upgraded to Code B.",
+    "air.p1":"The island already has an airstrip. Intervention is limited to <strong>extending it to 1,500 m</strong>, recategorizing it as Code B (regional jets like Embraer Phenom 300, Bombardier Global 7500). Permeable pavement, low-consumption LED beacons, 400 m² CLT terminal. No new forest cleared.",
+    "air.p2":"From the strip, the guest takes a Land Cruiser (8 minutes on existing road) to the hotel. On the way back, the protocol reverses. The strip is never the destination: it is the threshold.",
+    "air.k1":"Length",
+    "air.k2":"Category",
+    "air.k3":"Terminal",
+    "air.k4":"Hotel transfer",
+    "air.note":"Governing principle",
+    "air.noteb":"No additional forest cleared. The existing strip is reused, only pavement is reinforced and beacons updated. No new strips, no additional heliports.",
+    "eq.eyebrow":"Layer 2 · Soft mobility",
+    "eq.h1":"Equestrian expansion",
+    "eq.h2":"from 6 to 30 heads.",
+    "eq.p1":"The current 6 horses are the seed. La Porcada's equestrian center grows to 30 head, with new CLT-built stables. The preferred breed is the Panamanian Paso Fino —native, docile, smooth-gaited— complemented by a few criollos for long rides.",
+    "eq.p2":"Horses are not just recreation: they are <strong>experiential transport</strong>. Equestrian trails exist segregated from pedestrian ones, traced over existing cattle routes. Brahman and horse coexist as they always have in Latin American countryside.",
+    "eq.k1":"Current heads",
+    "eq.k2":"Target heads",
+    "eq.k3":"Breeds",
+    "eq.k4":"Stables",
+    "eq.k5":"Trails",
+    "pr.eyebrow":"Ecosystem decalogue",
+    "pr.h1":"Ten principles",
+    "pr.h2":"non-negotiable.",
+    "pr.p1":"<strong>Zero new roads.</strong> Every boardwalk is traced over existing cattle routes or already-disturbed corridors. No century-old tree is touched.",
+    "pr.p2":"<strong>100% electric inside the perimeter.</strong> Buggies, water taxis, service EVs. Zero internal combustion. Zero engine noise. Zero local emissions.",
+    "pr.p3":"<strong>Land Cruiser outside the premises.</strong> The VIP fleet circulates only in the strip–hotel band and on external excursions. Never inside the resort.",
+    "pr.p4":"<strong>Guaranteed fauna passage.</strong> Every 80 m, the boardwalk leaves a 60 cm-high free span. Brahman, agoutis and iguanas cross without obstacle.",
+    "pr.p5":"<strong>Cattle corridors preserved.</strong> The 300 Brahman heads remain free. Their routes are sacred. The boardwalk crosses over them.",
+    "pr.p6":"<strong>Dark sky compliance.</strong> Recessed lighting, 2700K, intensity &lt; 5 lux. Zero overhead light. Zero light pollution. The stars are visible.",
+    "pr.p7":"<strong>35 dB acoustic ceiling.</strong> In guest zones, ambient sound does not exceed 35 dB. Electric buggies emit &lt; 40 dB at 5 m. Silence is luxury.",
+    "pr.p8":"<strong>No-wake marina.</strong> Maximum speed 5 knots across the entire inner perimeter. Epoxy dock fenders for zero hydrocarbon pollution.",
+    "pr.p9":"<strong>8 m vegetational buffer.</strong> Every road, boardwalk or trail leaves 8 m of native vegetation on both sides. Active restoration with local species.",
+    "pr.p10":"<strong>Intact spring.</strong> La Porcada's water source is never channeled. Its natural course is respected. Only what is necessary is captured, without altering the hydrological cycle.",
+    "close.eyebrow":"Closing",
+    "close.h1":"Moving through La Porcada",
+    "close.h2":"is walking over the forest.",
+    "close.p":"Twelve black Land Cruisers to enter and exit. Four hundred and thirty electric vehicles to move inside. Fourteen kilometers of elevated boardwalk. Thirty horses. Eight water taxis. A marina that respects the mangrove. A strip that is not expanded. And beneath it all, the forest, intact, as it was before we arrived.",
+    "close.sign":"— La Porcada × Aman · Mobility 2026 —",
+    "foot.tag":"Investment Pioneer",
+    "foot.l1":"Isla Porcada · Chiriquí",
+    "foot.l2":"Panama",
+    "foot.motto":"« Nature is not domesticated, it is revered. »"
+  }
+};
+
+function applyLanguage(lang){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(translations[lang][key] !== undefined){
+      el.innerHTML = translations[lang][key];
+    }
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold:0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+applyLanguage('es');
+</script>
+</body>
+</html>
